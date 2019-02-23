@@ -1,0 +1,114 @@
+<html>
+<head>
+<title>Labsheet 2</title>
+<script>
+//**********************Question 01
+
+var vehicleName = 'Toyota';
+
+function printVehicleNameOuter(){
+	console.log(this.vehicleName);
+}
+
+console.log(this);
+
+printVehicleNameOuter();
+
+/*
+var vehicle = {
+	vehicleName : 'Nissan',
+	printVehicleNameInner : printVehicleNameOuter
+}
+*/
+
+var vehicle = {
+	vehicleName : 'Nissan',
+	printVehicleNameInner : function(){
+	return function(){
+		console.log(this.vehicleName);
+		}
+	}
+}
+	
+/*
+var execute = vehicle.printVehicleNameInner();
+
+execute();
+
+execute.call(vehicle);
+*/
+
+var execute = vehicle.printVehicleNameInner().bind(vehicle);
+
+execute();
+
+
+//**********************Question 02
+
+function taxCalculator(tax){
+	return function(amount){
+		return amount*tax/100;
+	}
+}
+
+var result = taxCalculator(10);
+
+console.log(result(90));
+
+
+//**********************Question 03
+
+/*
+async function fetchUsers(){
+	await fetch('https://api.github.com/users').then(function (response){
+		return response.json();
+	}).then(function (json){
+		console.log(json);
+	});
+}
+
+fetchUsers();
+*/
+
+async function fetchUsers(){
+	 return await fetch('https://api.github.com/users').then(response => response.json());
+}
+fetchUsers().then(function (json){
+	console.log(json);
+});
+
+
+//**********************Question 04
+
+function Vehicle(type){
+	Vehicle.VehicleCount++;
+	this.type = type;
+}
+
+Vehicle.prototype.drive = function(){
+	console.log('Vehicle is driving');
+}
+
+//Static variable
+Vehicle.VehicleCount = 0;
+
+var vehicle = new Vehicle('Toyota');
+
+//Checking the vehicle count
+console.log(Vehicle.VehicleCount);
+
+//Creating a class named Car
+function Car(){
+
+}
+
+
+
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
