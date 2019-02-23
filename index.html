@@ -2,7 +2,7 @@
 <head>
 <title>Labsheet 2</title>
 <script>
-//**********************Question 01
+//**********************Question 01 ******************//
 
 var vehicleName = 'Toyota';
 
@@ -29,7 +29,7 @@ var vehicle = {
 		}
 	}
 }
-	
+
 /*
 var execute = vehicle.printVehicleNameInner();
 
@@ -43,7 +43,7 @@ var execute = vehicle.printVehicleNameInner().bind(vehicle);
 execute();
 
 
-//**********************Question 02
+//**********************Question 02 ********************//
 
 function taxCalculator(tax){
 	return function(amount){
@@ -56,7 +56,7 @@ var result = taxCalculator(10);
 console.log(result(90));
 
 
-//**********************Question 03
+//**********************Question 03 ********************//
 
 /*
 async function fetchUsers(){
@@ -78,7 +78,7 @@ fetchUsers().then(function (json){
 });
 
 
-//**********************Question 04
+//**********************Question 04 ****************//
 
 function Vehicle(type){
 	Vehicle.VehicleCount++;
@@ -99,8 +99,87 @@ console.log(Vehicle.VehicleCount);
 
 //Creating a class named Car
 function Car(){
-
 }
+
+Car.prototype = Object.create(Vehicle.prototype);
+Car.prototype.constructor = Car;
+
+Car.prototype.balanceWheels = function () {
+    console.log('Wheels are balanced');
+}
+
+var car = new Car('Nissan');
+car.balanceWheels();
+car.drive();
+
+console.log(Vehicle.VehicleCount);
+
+
+//************************ Question 05 *****************//
+
+    let vehicleBrand ="Toyota";
+    vehicleBrand = "Nissan";
+    const COUNTRY = "Japan";
+
+    console.log('Vehicle Name ' + vehicleBrand);
+    console.log('Country ' + COUNTRY);
+
+//************************* Question 06 ***************//
+
+    function fetchUsers(){
+        return fetch('https://api.github.com/users').then(response => response.json());
+    }
+
+    fetchUsers().then(json => {
+       console.log(json);
+    });
+
+    //******************** Question 07 ******************//
+
+    async function fetchUsersAsync(){
+        const response = await fetch('https://api.github.com/users');
+        const json = await response.json();
+        console.log(json);
+    }
+
+    fetchUsersAsync();
+
+
+    //******************* Question 08 ********************//
+
+    class Vehicles{
+        constructor(type){
+            Vehicles.VehicleCount++;
+            this.type = type;
+        }
+
+        drive(){
+            console.log('Vehicle is Driving');
+        }
+    }
+
+    Vehicles.VehicleCount = 0;
+
+    const vehicles = new Vehicles('toyota');
+    vehicles.drive();
+    console.log(Vehicle.VehicleCount);
+
+    class Cars extends Vehicles{
+        constructor(type){
+            super();
+        }
+
+        balanceWheels(){
+            console.log('Wheels are balanced');
+        }
+    }
+
+    const cars = new Cars('Nissan');
+    cars.drive();
+    cars.balanceWheels();
+
+    console.log(Vehicle.VehicleCount);
+
 
 
 
